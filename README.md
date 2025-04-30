@@ -18,7 +18,7 @@ HTML5 + CSS3
 🔗 wee-pink.vercel.app
 
 📦 Como executar o projeto localmente
-Clone o repositório: git clone https://github.com/nicolevitoriaa/CRUD_Wee-Pink.git cd CRUD_Wee-Pink
+Clone o repositório: git clone [repositorio](https://github.com/riossisabelle/Wee-pink) cd CRUD_Wee-Pink
 Instale as dependências: npm install
 
 Rode a aplicação: Editar npm start
