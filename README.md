@@ -1,14 +1,14 @@
-CRUD Wee-Pink
+# CRUD Wee-Pink
 Status React
 
-📋 Descrição
+## 📋 Descrição
 O CRUD "Wee-Pink" é uma aplicação web desenvolvida com React.js, com o objetivo de gerenciar um cadastro perfumes através das operações CRUD (Criar, Listar, Editar e Exluir). O projeto possui uma interface amigável e foi desenvolvido como parte do curso de Desenvolvimento de Sistemas.
 
-🚀 Funcionalidades
-✅ Cadastrar novos produtos
-✅ Editar informações existentes
-✅ Excluir registros
-✅ Visualizar todos os dados cadastrados
+## 🚀 Funcionalidades
+- ✅ Cadastrar novos produtos
+- ✅ Editar informações existentes
+- ✅ Excluir registros
+- ✅ Visualizar todos os dados cadastrados
 🛠️ Tecnologias Utilizadas
 React.js
 JavaScript (ES6+)
