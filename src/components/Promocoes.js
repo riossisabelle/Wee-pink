@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
-import { Table, Button, Form, Container, Row, Col } from 'react-bootstrap';
+import { Table, Button, Form } from 'react-bootstrap';
 import { FaTrash, FaEdit, FaShoppingCart } from 'react-icons/fa';
 
 export default function Promocoes() {
   const [produtos, setProdutos] = useState([]);
-  const [formData, setFormData] = useState({ nome: '', descricao: '', preco: '' });
+  const [formData, setFormData] = useState({ classificacao: '', nome: '', descricao: '', preco: '' });
   const [editingIndex, setEditingIndex] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     if (name === 'preco') {
       if (!/^\d*\.?\d*$/.test(value)) return;
     }
+
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = () => {
-    if (formData.nome && formData.descricao && formData.preco) {
+    if (formData.classificacao && formData.nome && formData.descricao && formData.preco) {
       if (editingIndex !== null) {
         const updatedProdutos = [...produtos];
         updatedProdutos[editingIndex] = formData;
@@ -25,7 +27,7 @@ export default function Promocoes() {
       } else {
         setProdutos([...produtos, formData]);
       }
-      setFormData({ nome: '', descricao: '', preco: '' });
+      setFormData({ classificacao: '', nome: '', descricao: '', preco: '' });
     }
   };
 
@@ -40,106 +42,112 @@ export default function Promocoes() {
   };
 
   return (
-    <div style={{ backgroundColor: '#fff', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      {/* Header */}
-      <header className="text-center" style={{ backgroundColor: '#F73E91', padding: '15px 0' }}>
+    <div className="text-center" style={{ backgroundColor: '#fff', padding: '20px', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <header style={{ backgroundColor: '#F73E91', padding: '15px 0', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
         <FaShoppingCart size={30} style={{ color: '#fff' }} />
-        <h2 style={{ color: '#fff', margin: 0 }}>Wee pink</h2>
+        <h2 style={{ color: '#fff', textShadow: '1px 1px 2px rgba(0,0,0,0.3)', margin: 0 }}>Wee pink</h2>
       </header>
 
-      <Container fluid className="py-4 flex-grow-1">
-        <Row className="justify-content-center mb-3">
-          <Col xs="auto">
-            <h3 className="text-center text-wrap" style={{ color: '#f443a4', fontWeight: '500' }}>
-              Meu Carrinho
-            </h3>
-          </Col>
-        </Row>
+      <h3 style={{
+        color: '#000',
+        margin: '20px auto',
+        padding: '10px 20px',
+        borderRadius: '8px',
+        fontWeight: '500'
+      }}>
+        Meu Carrinho
+      </h3>
 
-        <Row className="justify-content-center">
-          <Col xs={12} md={10} lg={8}>
-            <div style={{ overflowX: 'auto' }}>
-              <Table bordered responsive hover>
-                <thead style={{ backgroundColor: '#FFB1D4', color: '#000' }}>
-                  <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Descrição</th>
-                    <th>Preço</th>
-                    <th>Ações</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>-</td>
-                    <td>
-                      <Form.Control
-                        type="text"
-                        name="nome"
-                        placeholder="Nome"
-                        value={formData.nome}
-                        onChange={handleChange}
-                      />
-                    </td>
-                    <td>
-                      <Form.Control
-                        type="text"
-                        name="descricao"
-                        placeholder="Descrição"
-                        value={formData.descricao}
-                        onChange={handleChange}
-                      />
-                    </td>
-                    <td>
-                      <Form.Control
-                        type="text"
-                        name="preco"
-                        placeholder="Preço"
-                        inputMode="decimal"
-                        value={formData.preco}
-                        onChange={handleChange}
-                      />
-                    </td>
-                    <td>
-                      <Button
-                        variant="light"
-                        onClick={handleSubmit}
-                        style={{ backgroundColor: '#FFB1D4', color: '#000' }}
-                      >
-                        {editingIndex !== null ? 'Salvar' : 'Adicionar'}
-                      </Button>
-                    </td>
-                  </tr>
+      <Table bordered hover>
+        <thead style={{ backgroundColor: '#FFB1D000', color: '#FFFF' }}>
+          <tr>
+            <th>ID</th>
+            <th>Classificação</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>-</td>
+            <td>
+              <Form.Control
+                type="text"
+                name="classificacao"
+                placeholder="Classificação"
+                value={formData.classificacao}
+                onChange={handleChange}
+              />
+            </td>
+            <td>
+              <Form.Control
+                type="text"
+                name="nome"
+                placeholder="Nome"
+                value={formData.nome}
+                onChange={handleChange}
+              />
+            </td>
+            <td>
+              <Form.Control
+                type="text"
+                name="descricao"
+                placeholder="Descrição"
+                value={formData.descricao}
+                onChange={handleChange}
+              />
+            </td>
+            <td>
+              <Form.Control
+                type="text"
+                name="preco"
+                placeholder="Preço"
+                inputMode="decimal"
+                value={formData.preco}
+                onChange={handleChange}
+              />
+            </td>
+            <td>
+              <Button
+                variant="light"
+                onClick={handleSubmit}
+                style={{ backgroundColor: '#FFB1D4', color: '#000' }}
+              >
+                {editingIndex !== null ? 'Salvar' : 'Adicionar'}
+              </Button>
+            </td>
+          </tr>
+          {produtos.map((produto, index) => (
+            <tr key={index}>
+              <td>{index + 1}</td>
+              <td>{produto.classificacao}</td>
+              <td>{produto.nome}</td>
+              <td>{produto.descricao}</td>
+              <td>R$ {Number(produto.preco).toFixed(2)}</td>
+              <td>
+                <Button
+                  variant="link"
+                  style={{ color: '#f443a4' }}
+                  onClick={() => handleEdit(index)}
+                >
+                  <FaEdit />
+                </Button>
+                <Button
+                  variant="link"
+                  style={{ color: 'red' }}
+                  onClick={() => handleDelete(index)}
+                >
+                  <FaTrash />
+                </Button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
 
-                  {produtos.map((produto, index) => (
-                    <tr key={index}>
-                      <td>{index + 1}</td>
-                      <td>{produto.nome}</td>
-                      <td>{produto.descricao}</td>
-                      <td>R$ {produto.preco}</td>
-                      <td>
-                        <Button
-                          variant="link"
-                          style={{ color: '#f443a4' }}
-                          onClick={() => (editingIndex === index ? handleSubmit() : handleEdit(index))}
-                        >
-                          {editingIndex === index ? 'Salvar' : <FaEdit />}
-                        </Button>
-                        <Button variant="link" style={{ color: 'red' }} onClick={() => handleDelete(index)}>
-                          <FaTrash />
-                        </Button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
-            </div>
-          </Col>
-        </Row>
-      </Container>
-
-      {/* Footer */}
-      <footer className="text-center mt-auto" style={{ backgroundColor: '#F73E91', color: '#fff', padding: '10px' }}>
+      <footer style={{ backgroundColor: '#F73E91', color: '#fff', padding: '10px', marginTop: 'auto' }}>
         <p style={{ margin: 0 }}>© 2025 Wee pink</p>
       </footer>
     </div>
